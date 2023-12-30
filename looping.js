@@ -3,12 +3,12 @@
 // }
 
 // nested loop
-// for (let i = 0; i < 5; i++) {
-// 	for (let j = 1; j < i; j++) {
-// 		console.log(j);
-// 	}
-// 	console.log(i);
-// }
+for (let i = 0; i < 5; i++) {
+	for (let j = 1; j < i; j++) {
+		console.log(j);
+	}
+	console.log(i);
+}
 
 // ganjil genap
 let i = 1;
