@@ -1,7 +1,7 @@
 // FUNCTION
 
 // fungsi dapat mengembalikan nilai dengan menggunakan return
-// jika tidak menggunakan retur maka tidak ada nilai atau undifined
+// jika tidak menggunakan return maka tidak ada nilai atau undifined
 
 // function helloWorld() {
 // 	return "hello world";
