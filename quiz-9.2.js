@@ -77,29 +77,38 @@ Diberikan sebuah function cariModus(arr) yang menerima sebuah array angka. Funct
 */
 function cariModus(arr) {
 	// you can only write your code here!
-	let arrSort = arr.sort(function (a, b) {
-		return a - b;
-	});
-	let modus = "";
-	for (let i = 0; i < arrSort.length; i++) {
-		if (arrSort[i] === arrSort[i + 1] && arrSort[i] !== arrSort[arrSort.length - 1]) {
-			modus = arrSort[i];
-			break;
-		} else if (arrSort[i] === arrSort[arrSort.length - 1]) {
-			modus = -1;
-		} else {
-			modus = -1;
+	let modus;
+	let result = 0;
+
+	for (let i = 0; i < arr.length; i++) {
+		let count = 0;
+
+		for (let j = 0; j < arr.length; j++) {
+			if (arr[i] === arr[j]) {
+				count++;
+			}
+		}
+
+		if (count > result) {
+			result = count;
+			modus = arr[i];
 		}
 	}
-	return modus;
+
+	if (result === 1 || result === arr.length) {
+		return -1;
+	} else {
+		return modus;
+	}
 }
 
 // TEST CASES
 console.log(cariModus([10, 4, 5, 2, 4])); // 4
-console.log(cariModus([5, 10, 10, 6, 5])); // 5
+console.log(cariModus([5, 10, 10, 10, 6, 5])); // 5
 console.log(cariModus([10, 3, 1, 2, 5])); // -1
 console.log(cariModus([1, 2, 3, 3, 4, 5])); // 3
 console.log(cariModus([7, 7, 7, 7, 7])); // -1
+console.log(cariModus([7, 3, 2, 3, 3, 2, 7]));
 
 console.log("");
 

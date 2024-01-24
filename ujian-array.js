@@ -4,23 +4,31 @@ Diberikan sebuah function targetTerdekat(arr) yang menerima satu parameter berup
 function targetTerdekat(arr) {
 	// you can only write your code here!
 
-	let pasanganX = "";
-	let pasanganO = "";
+	let pasanganX = [];
+	let pasanganO = [];
+	let jarak = 0;
 
 	for (let i = 0; i < arr.length; i++) {
 		if (arr[i] === "o") {
-			pasanganO = i;
+			pasanganO.push(i);
 		}
 		if (arr[i] === "x") {
-			pasanganX = i;
-			break;
+			pasanganX.push(i);
 		}
 	}
-	if (pasanganX.length === 0) {
-		return 0;
-	} else {
-		return Math.abs(pasanganX - pasanganO);
+
+	for (let i = 0; i < pasanganO.length; i++) {
+		for (let j = 0; j < pasanganX.length; j++) {
+			if (jarak === 0) {
+				jarak = Math.abs(pasanganO[i] - pasanganX[j]);
+			} else {
+				if (Math.abs(pasanganO[i] - pasanganX[j]) < jarak) {
+					jarak = Math.abs(pasanganO[i] - pasanganX[j]);
+				}
+			}
+		}
 	}
+	return jarak;
 }
 
 // TEST CASES
@@ -75,25 +83,27 @@ fungsi ini akan me-return array 2 dimensi
 */
 function groupAnimals(animals) {
 	// you can only write your code here!
-	animals.sort();
-	let array1 = [];
-	let array2 = [];
-	let array3 = [];
-	let array4 = [];
-	let allArray = [];
-	for (let i = 0; i < animals.length; i++) {
-		// if (animals[i][0] === "a") {
-		// 	array1.push(animals[i]);
-		// } else if (animals[i][0] === "c") {
-		// 	array2.push(animals[i]);
-		// } else if (animals[i][0] === "k") {
-		// 	array3.push(animals[i]);
-		// } else {
-		// 	array4.push(animals[i]);
-		// }
+	let arr = [];
+	let finalArr = [];
+	// Sort
+	animals = animals.sort();
+
+	let panjang = animals.length;
+
+	for (let i = 0; i < panjang; i++) {
+		if (arr[animals[i][0]] === undefined) {
+			arr[animals[i][0]] = [];
+			arr[animals[i][0]].push(animals[i]);
+		} else {
+			arr[animals[i][0]].push(animals[i]);
+		}
 	}
-	allArray.splice(0, 0, array1, array2, array3, array4);
-	return allArray;
+
+	for (let key in arr) {
+		finalArr.push(arr[key]);
+	}
+
+	return finalArr;
 }
 
 // TEST CASES
