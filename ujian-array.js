@@ -4,16 +4,23 @@ Diberikan sebuah function targetTerdekat(arr) yang menerima satu parameter berup
 function targetTerdekat(arr) {
 	// you can only write your code here!
 
-	let j = "";
-	let k = "";
-	let l = "";
+	let pasanganX = "";
+	let pasanganO = "";
+
 	for (let i = 0; i < arr.length; i++) {
 		if (arr[i] === "o") {
-			j = i;
+			pasanganO = i;
 		}
-		
+		if (arr[i] === "x") {
+			pasanganX = i;
+			break;
+		}
 	}
-	return k - j;
+	if (pasanganX.length === 0) {
+		return 0;
+	} else {
+		return Math.abs(pasanganX - pasanganO);
+	}
 }
 
 // TEST CASES
@@ -75,15 +82,15 @@ function groupAnimals(animals) {
 	let array4 = [];
 	let allArray = [];
 	for (let i = 0; i < animals.length; i++) {
-		if (animals[i][0] === "a" && animals[i][0] !== "u") {
-			array1.push(animals[i]);
-		} else if (animals[i][0] === "c" && animals[i][0] !== "u") {
-			array2.push(animals[i]);
-		} else if (animals[i][0] === "k" && animals[i][0] !== "u") {
-			array3.push(animals[i]);
-		} else {
-			array4.push(animals[i]);
-		}
+		// if (animals[i][0] === "a") {
+		// 	array1.push(animals[i]);
+		// } else if (animals[i][0] === "c") {
+		// 	array2.push(animals[i]);
+		// } else if (animals[i][0] === "k") {
+		// 	array3.push(animals[i]);
+		// } else {
+		// 	array4.push(animals[i]);
+		// }
 	}
 	allArray.splice(0, 0, array1, array2, array3, array4);
 	return allArray;
