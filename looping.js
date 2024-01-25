@@ -4,11 +4,15 @@
 
 // nested loop
 for (let i = 0; i < 5; i++) {
-	for (let j = 1; j < i; j++) {
-		console.log(j);
+	for (let j = 0; j < 5; j++) {
+		if (i === j) {
+			console.log(j);
+		}
 	}
-	console.log(i);
+	// console.log(i);
 }
+
+console.log("");
 
 // ganjil genap
 let i = 1;

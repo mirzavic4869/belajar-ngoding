@@ -4,31 +4,53 @@ Diberikan sebuah function targetTerdekat(arr) yang menerima satu parameter berup
 function targetTerdekat(arr) {
 	// you can only write your code here!
 
-	let pasanganX = [];
-	let pasanganO = [];
-	let jarak = 0;
+	// let pasanganX = [];
+	// let pasanganO = [];
+	// let jarak = 0;
+
+	// for (let i = 0; i < arr.length; i++) {
+	// 	if (arr[i] === "o") {
+	// 		pasanganO.push(i);
+	// 	}
+	// 	if (arr[i] === "x") {
+	// 		pasanganX.push(i);
+	// 	}
+	// }
+
+	// for (let i = 0; i < pasanganO.length; i++) {
+	// 	for (let j = 0; j < pasanganX.length; j++) {
+	// 		if (jarak === 0) {
+	// 			jarak = Math.abs(pasanganO[i] - pasanganX[j]);
+	// 		} else {
+	// 			if (Math.abs(pasanganO[i] - pasanganX[j]) < jarak) {
+	// 				jarak = Math.abs(pasanganO[i] - pasanganX[j]);
+	// 			}
+	// 		}
+	// 	}
+	// }
+	// return jarak;
+
+	let indexO = -1;
+	let indexX = -1;
 
 	for (let i = 0; i < arr.length; i++) {
 		if (arr[i] === "o") {
-			pasanganO.push(i);
+			indexO = i;
 		}
 		if (arr[i] === "x") {
-			pasanganX.push(i);
+			indexX = i;
+		}
+
+		if (indexO > -1 && indexX > -1) {
+			break;
 		}
 	}
 
-	for (let i = 0; i < pasanganO.length; i++) {
-		for (let j = 0; j < pasanganX.length; j++) {
-			if (jarak === 0) {
-				jarak = Math.abs(pasanganO[i] - pasanganX[j]);
-			} else {
-				if (Math.abs(pasanganO[i] - pasanganX[j]) < jarak) {
-					jarak = Math.abs(pasanganO[i] - pasanganX[j]);
-				}
-			}
-		}
+	if (indexO < 0 || indexX < 0) {
+		return 0;
+	} else {
+		return Math.abs(indexO - indexX);
 	}
-	return jarak;
 }
 
 // TEST CASES
