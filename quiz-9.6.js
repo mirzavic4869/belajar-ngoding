@@ -1,34 +1,18 @@
 function changeMe(arr) {
 	// you can only write your code here!
-	let array = [];
-
-	for (let i = 0; i < arr.length; i++) {
-		for (let j = 0; j < arr[i].length; j++) {
-			array.push(arr[i][j]);
-		}
-	}
-
 	if (arr.length === 0) {
-		console.log("");
+		console.log(arr);
 	} else {
-		const obj1 = {
-			firstName: array[0],
-			lastName: array[1],
-			gender: array[2],
-			age: new Date().getFullYear() - array[3],
-		};
-
-		const obj2 = {
-			firstName: array[4],
-			lastName: array[5],
-			gender: array[6],
-			age: "Invalid Birth Year",
-		};
-
-		console.log(obj1.firstName + " " + obj1.lastName + ":");
-		console.log(obj1);
-		console.log(obj2.firstName + " " + obj2.lastName + ":");
-		console.log(obj2);
+		for (let i = 0; i < arr.length; i++) {
+			const obj = {
+				firstName: arr[i][0],
+				lastName: arr[i][1],
+				gender: arr[i][2],
+				age: arr[i][3] === undefined ? "Invalid Birth Year" : new Date().getFullYear() - arr[i][3],
+			};
+			console.log(`${arr[i][0]} ${arr[i][1]}:`);
+			console.log(obj);
+		}
 	}
 }
 
@@ -103,80 +87,6 @@ function shoppingTime(memberId, money) {
 			}
 
 			return obj;
-			// const listItem = {
-			// 	sepatuStacattu: 1500000,
-			// 	bajuZoro: 500000,
-			// 	bajuHN: 250000,
-			// 	sweaterUniklooh: 175000,
-			// 	casingHP: 50000,
-			// };
-
-			// let listPurchased = [];
-			// let changeMoney = 0;
-
-			// if (money >= listItem.sepatuStacattu) {
-			// 	changeMoney = money - listItem.sepatuStacattu;
-			// 	listPurchased.push("Sepatu Stacattu");
-			// 	if (changeMoney >= listItem.bajuZoro) {
-			// 		changeMoney = changeMoney - listItem.bajuZoro;
-			// 		listPurchased.push("Baju Zoro");
-			// 		if (changeMoney >= listItem.bajuHN) {
-			// 			changeMoney = changeMoney - listItem.bajuHN;
-			// 			listPurchased.push("Baju H&N");
-			// 			if (changeMoney >= listItem.sweaterUniklooh) {
-			// 				changeMoney = changeMoney - listItem.sweaterUniklooh;
-			// 				listPurchased.push("Sweater Uniklooh");
-			// 				if (changeMoney >= listItem.casingHP) {
-			// 					changeMoney = changeMoney - listItem.casingHP;
-			// 					listPurchased.push("Casing Handphone");
-			// 				}
-			// 			}
-			// 		}
-			// 	}
-			// } else if (money >= listItem.bajuZoro) {
-			// 	changeMoney = money - listItem.bajuZoro;
-			// 	listPurchased.push("Baju Zoro");
-			// 	if (changeMoney >= listItem.bajuHN) {
-			// 		changeMoney = changeMoney - listItem.bajuHN;
-			// 		listPurchased.push("Baju H&N");
-			// 		if (changeMoney >= listItem.sweaterUniklooh) {
-			// 			changeMoney = changeMoney - listItem.sweaterUniklooh;
-			// 			listPurchased.push("Sweater Uniklooh");
-			// 			if (changeMoney >= listItem.casingHP) {
-			// 				changeMoney = changeMoney - listItem.casingHP;
-			// 				listPurchased.push("Casing Handphone");
-			// 			}
-			// 		}
-			// 	}
-			// } else if (money >= listItem.bajuHN) {
-			// 	changeMoney = money - listItem.bajuHN;
-			// 	listPurchased.push("Baju H&N");
-			// 	if (changeMoney >= listItem.sweaterUniklooh) {
-			// 		changeMoney = changeMoney - listItem.sweaterUniklooh;
-			// 		listPurchased.push("Sweater Uniklooh");
-			// 		if (changeMoney >= listItem.casingHP) {
-			// 			changeMoney = changeMoney - listItem.casingHP;
-			// 			listPurchased.push("Casing Handphone");
-			// 		}
-			// 	}
-			// } else if (money >= listItem.sweaterUniklooh) {
-			// 	changeMoney = money - listItem.sweaterUniklooh;
-			// 	listPurchased.push("Sweater Uniklooh");
-			// 	if (changeMoney >= listItem.casingHP) {
-			// 		changeMoney = changeMoney - listItem.casingHP;
-			// 		listPurchased.push("Casing Handphone");
-			// 	}
-			// } else {
-			// 	changeMoney = money - listItem.casingHP;
-			// 	listPurchased.push("Casing Handphone");
-			// }
-
-			// const obj = {
-			// 	memberId: memberId,
-			// 	money: money,
-			// 	listPurchased: listPurchased,
-			// 	changeMoney: changeMoney,
-			// };
 		}
 	}
 }
