@@ -18,36 +18,48 @@ Return 2
 */
 function digitPerkalianMinimum(angka) {
 	// you can only write your code here!
-	let faktor = [];
-	for (let i = 0; i <= angka; i++) {
-		if (angka % i === 0) {
-			faktor.push(i);
-		}
-	}
-	if (faktor.length === 1) {
-		return 2;
-	}
+	// let faktor = [];
+	// for (let i = 0; i <= angka; i++) {
+	// 	if (angka % i === 0) {
+	// 		faktor.push(i);
+	// 	}
+	// }
+	// if (faktor.length === 1) {
+	// 	return 2;
+	// }
 
-	let faktorMin = [];
-	for (let i = 0; i <= faktor.length; i++) {
-		for (let j = faktor.length - 1; j > 0; j--) {
-			if (faktor[i] * faktor[j] === angka) {
-				faktorMin.push(faktor[i].toString() + faktor[j].toString());
+	// let faktorMin = [];
+	// for (let i = 0; i <= faktor.length; i++) {
+	// 	for (let j = faktor.length - 1; j > 0; j--) {
+	// 		if (faktor[i] * faktor[j] === angka) {
+	// 			faktorMin.push(faktor[i].toString() + faktor[j].toString());
+	// 		}
+	// 	}
+	// }
+
+	// let digitMin = faktorMin[0].length;
+	// for (let i = 0; i < faktorMin.length; i++) {
+	// 	if (faktorMin.length === 1) {
+	// 		digitMin = faktorMin[i].length;
+	// 	} else if (digitMin < faktorMin[i].length) {
+	// 		return digitMin;
+	// 	} else {
+	// 		digitMin = faktorMin[i].length;
+	// 	}
+	// }
+	// return digitMin;
+
+	let min = 9999;
+	for (let i = 1; i <= angka; i++) {
+		if (angka % i === 0) {
+			let hasilBagi = angka / i + ""; //biar jadi string
+			let dividerLen = (i + "").length;
+			if (min > hasilBagi.length + dividerLen) {
+				min = hasilBagi.length + dividerLen;
 			}
 		}
 	}
-
-	let digitMin = faktorMin[0].length;
-	for (let i = 0; i < faktorMin.length; i++) {
-		if (faktorMin.length === 1) {
-			digitMin = faktorMin[i].length;
-		} else if (digitMin < faktorMin[i].length) {
-			return digitMin;
-		} else {
-			digitMin = faktorMin[i].length;
-		}
-	}
-	return digitMin;
+	return min;
 }
 
 // TEST CASES
@@ -63,31 +75,46 @@ console.log("");
 //saran sih pake bubblesort walau tidak efisien tapi bagus buat belajar sorting
 function urutkanAbjad(str) {
 	// you can only write your code here!
-	let k = [];
-	for (let i = 0; i < str.length; i++) {
-		k.push(str.charCodeAt(i) - 96);
-	}
+	// let k = [];
+	// for (let i = 0; i < str.length; i++) {
+	// 	k.push(str.charCodeAt(i) - 96);
+	// }
 
-	let swapped;
+	// let swapped;
+
+	// do {
+	// 	swapped = false;
+	// 	for (let i = 0; i < k.length; i++) {
+	// 		if (k[i] > k[i + 1]) {
+	// 			let temp = k[i];
+	// 			k[i] = k[i + 1];
+	// 			k[i + 1] = temp;
+	// 			swapped = true;
+	// 		}
+	// 	}
+	// } while (swapped);
+
+	// let alphabet = "";
+	// for (let i = 0; i < k.length; i++) {
+	// 	alphabet += String.fromCharCode(96 + k[i]);
+	// }
+
+	// return alphabet;
+	str = str.split("");
 
 	do {
 		swapped = false;
-		for (let i = 0; i < k.length; i++) {
-			if (k[i] > k[i + 1]) {
-				let temp = k[i];
-				k[i] = k[i + 1];
-				k[i + 1] = temp;
+		for (let i = 0; i < str.length; i++) {
+			if (str[i] > str[i + 1]) {
+				let temp = str[i];
+				str[i] = str[i + 1];
+				str[i + 1] = temp;
 				swapped = true;
 			}
 		}
 	} while (swapped);
 
-	let alphabet = "";
-	for (let i = 0; i < k.length; i++) {
-		alphabet += String.fromCharCode(96 + k[i]);
-	}
-
-	return alphabet;
+	return str.join("");
 }
 
 // TEST CASES
@@ -103,14 +130,9 @@ console.log("");
 function tukarBesarKecil(kalimat) {
 	// you can only write your code here!
 
-	let word = "";
-	for (let i = 0; i < kalimat.length; i++) {
-		word += kalimat[i].toUpperCase();
-	}
-
 	let change = "";
-	for (let i = 0; i < word.length; i++) {
-		if (kalimat[i] === word[i]) {
+	for (let i = 0; i < kalimat.length; i++) {
+		if (kalimat[i].toUpperCase() === kalimat[i]) {
 			change += kalimat[i].toLowerCase();
 		} else {
 			change += kalimat[i].toUpperCase();
