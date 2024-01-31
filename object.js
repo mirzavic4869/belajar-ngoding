@@ -11,6 +11,7 @@ const myObj = {
 console.log(myObj);
 console.log(myObj.name);
 console.log(myObj.hobbies[2]);
+console.log(myObj["details"]["height"]);
 
 console.log("");
 
