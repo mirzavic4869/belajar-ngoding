@@ -45,17 +45,17 @@ function meleeRangedGrouping(str) {
 		return [];
 	} else {
 		let separate = str.split(",");
-		// let pisah = separate[0].slice(0, 5);
-		// return pisah;
-
 		let array = [];
+		let ranged = [];
+		let melee = [];
 		for (let i = 0; i < separate.length; i++) {
-			for (let j = 0; j < separate[i].length; j++) {
-				if (separate[i][j] === "-") {
-					array.push(separate[i].slice(0, 6));
-				}
+			if (separate[i].includes("Ranged")) {
+				ranged.push(separate[i].replace("-Ranged", ""));
+			} else if (separate[i].includes("Melee")) {
+				melee.push(separate[i].replace("-Melee", ""));
 			}
 		}
+		array.push(ranged, melee);
 		return array;
 	}
 }
