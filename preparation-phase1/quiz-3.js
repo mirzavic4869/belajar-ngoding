@@ -285,17 +285,16 @@ Dilarang menggunakan sintaks Set atau Regex
 */
 function initialObjectGrouping(studentsArr) {
 	//CODE HERE
-
 	let obj = {};
-	for (let i = 0; i < studentsArr.length; i++) {
-		let firstChar = studentsArr[i][0];
 
-		if (obj[firstChar] === undefined) {
-			obj[firstChar] = [studentsArr[i]];
-		} else {
-			obj[firstChar].push(studentsArr[i]);
+	for (let i = 0; i < studentsArr.length; i++) {
+		if (!obj[studentsArr[i][0]]) {
+			obj[studentsArr[i][0]] = [];
 		}
+
+		obj[studentsArr[i][0]].push(studentsArr[i]);
 	}
+
 	return obj;
 }
 console.log(initialObjectGrouping(["Budi", "Badu", "Joni", "Jono"]));
@@ -359,6 +358,69 @@ Note:
 
 function travelingIndonesia(arr, emoney) {
 	//code here
+	const routes = ["Yogyakarta", "Semarang", "Surabaya", "Denpasar"];
+	const transportationCosts = {
+		Pesawat: 275000,
+		Kereta: 250000,
+		Bis: 225000,
+	};
+
+	const discounts = {
+		OVO: 0.15,
+		Dana: 0.1,
+		Gopay: 0.05,
+		Cash: 0,
+	};
+
+	let totalCosts = {
+		Pesawat: 0,
+		Kereta: 0,
+		Bis: 0,
+	};
+
+	// Loop through the routes
+	for (let i = 0; i < routes.length - 1; i++) {
+		let currentRoute = routes[i];
+		let nextRoute = routes[i + 1];
+
+		let transportation = "";
+		// Determine the transportation mode based on the route
+		if (
+			(currentRoute === "Yogyakarta" && nextRoute === "Semarang") ||
+			(currentRoute === "Semarang" && nextRoute === "Yogyakarta") ||
+			(currentRoute === "Surabaya" && nextRoute === "Denpasar") ||
+			(currentRoute === "Denpasar" && nextRoute === "Surabaya")
+		) {
+			transportation = "Pesawat";
+		} else if ((currentRoute === "Yogyakarta" && nextRoute === "Surabaya") || (currentRoute === "Surabaya" && nextRoute === "Yogyakarta")) {
+			transportation = "Kereta";
+		} else {
+			transportation = "Bis";
+		}
+
+		// Calculate the cost for each transportation mode
+		let cost = transportationCosts[transportation];
+		let discount = 1 - discounts[emoney];
+		totalCosts[transportation] += cost * discount;
+	}
+
+	// Find the maximum cost
+	let maxCost = Math.max(totalCosts["Pesawat"], totalCosts["Kereta"], totalCosts["Bis"]);
+
+	let result = [];
+	// Determine which transportation mode(s) have the maximum cost
+	if (totalCosts["Pesawat"] === maxCost) {
+		result.push("Pesawat");
+	}
+	if (totalCosts["Kereta"] === maxCost) {
+		result.push("Kereta");
+	}
+	if (totalCosts["Bis"] === maxCost) {
+		result.push("Bis");
+	}
+
+	// Return the transportation mode(s) with the maximum cost
+	return result;
 }
 
 console.log(travelingIndonesia(["Danang-Yogyakarta-Semarang-Bis", "Alif-Denpasar-Surabaya-Kereta", "Bahari-Semarang-Denpasar-Pesawat"], "OVO"));
@@ -455,11 +517,13 @@ function deleteUndefinedKeys(data) {
 		return "No data";
 	} else {
 		for (let i = 0; i < data.length; i++) {
-			if (Object.values(data[i]) === undefined) {
+			for (const value in data[i]) {
+				if (data[i][value] === undefined) {
+					delete data[i][value];
+				}
 			}
 		}
-
-		return Object.values(data[0]) === undefined;
+		return data;
 	}
 }
 
