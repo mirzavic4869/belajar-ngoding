@@ -358,69 +358,82 @@ Note:
 
 function travelingIndonesia(arr, emoney) {
 	//code here
-	const routes = ["Yogyakarta", "Semarang", "Surabaya", "Denpasar"];
-	const transportationCosts = {
-		Pesawat: 275000,
-		Kereta: 250000,
-		Bis: 225000,
-	};
+	if (arr.length === 0) {
+		return arr;
+	} else {
+		let city = ["Yogyakarta", "Semarang", "Surabaya", "Denpasar"];
+		let regex = /[a-z,A-Z]+/g;
+		let departureCity = [];
+		let destinationCity = [];
 
-	const discounts = {
-		OVO: 0.15,
-		Dana: 0.1,
-		Gopay: 0.05,
-		Cash: 0,
-	};
+		let price = 0;
+		let discount = 0;
+		let totalCost = 0;
 
-	let totalCosts = {
-		Pesawat: 0,
-		Kereta: 0,
-		Bis: 0,
-	};
+		let array = [];
 
-	// Loop through the routes
-	for (let i = 0; i < routes.length - 1; i++) {
-		let currentRoute = routes[i];
-		let nextRoute = routes[i + 1];
+		for (let i = 0; i < arr.length; i++) {
+			// console.log(arr[i].match(regex));
+			let name = arr[i].match(regex)[0];
+			let departure = arr[i].match(regex)[1];
+			let destination = arr[i].match(regex)[2];
+			let transportation = arr[i].match(regex)[3];
 
-		let transportation = "";
-		// Determine the transportation mode based on the route
-		if (
-			(currentRoute === "Yogyakarta" && nextRoute === "Semarang") ||
-			(currentRoute === "Semarang" && nextRoute === "Yogyakarta") ||
-			(currentRoute === "Surabaya" && nextRoute === "Denpasar") ||
-			(currentRoute === "Denpasar" && nextRoute === "Surabaya")
-		) {
-			transportation = "Pesawat";
-		} else if ((currentRoute === "Yogyakarta" && nextRoute === "Surabaya") || (currentRoute === "Surabaya" && nextRoute === "Yogyakarta")) {
-			transportation = "Kereta";
-		} else {
-			transportation = "Bis";
+			for (let j = 0; j < city.length; j++) {
+				if (departure === city[j]) {
+					departureCity.push(j);
+				} else if (destination === city[j]) {
+					destinationCity.push(j);
+				}
+			}
+
+			let range = Math.abs(departureCity[i] - destinationCity[i]);
+
+			if (transportation === "Pesawat") {
+				price = 275000;
+			} else if (transportation === "Kereta") {
+				price = 250000;
+			} else if (transportation === "Bis") {
+				price = 225000;
+			}
+
+			if (emoney === "OVO") {
+				discount = 15 / 100;
+			} else if (emoney === "Dana") {
+				discount = 10 / 100;
+			} else if (emoney === "Gopay") {
+				discount = 5 / 100;
+			} else {
+				discount = 0;
+			}
+
+			totalCost = range * (price - price * discount);
+
+			let obj = {
+				name: name,
+				departureCity: departure,
+				destinationCity: destination,
+				transport: transportation,
+				totalCost: totalCost,
+			};
+
+			array.push(obj);
 		}
 
-		// Calculate the cost for each transportation mode
-		let cost = transportationCosts[transportation];
-		let discount = 1 - discounts[emoney];
-		totalCosts[transportation] += cost * discount;
-	}
+		do {
+			swapped = false;
+			for (let i = 1; i < array.length; i++) {
+				if (array[i].totalCost > array[i - 1].totalCost) {
+					let temp = array[i];
+					array[i] = array[i - 1];
+					array[i - 1] = temp;
+					swapped = true;
+				}
+			}
+		} while (swapped);
 
-	// Find the maximum cost
-	let maxCost = Math.max(totalCosts["Pesawat"], totalCosts["Kereta"], totalCosts["Bis"]);
-
-	let result = [];
-	// Determine which transportation mode(s) have the maximum cost
-	if (totalCosts["Pesawat"] === maxCost) {
-		result.push("Pesawat");
+		return array;
 	}
-	if (totalCosts["Kereta"] === maxCost) {
-		result.push("Kereta");
-	}
-	if (totalCosts["Bis"] === maxCost) {
-		result.push("Bis");
-	}
-
-	// Return the transportation mode(s) with the maximum cost
-	return result;
 }
 
 console.log(travelingIndonesia(["Danang-Yogyakarta-Semarang-Bis", "Alif-Denpasar-Surabaya-Kereta", "Bahari-Semarang-Denpasar-Pesawat"], "OVO"));
