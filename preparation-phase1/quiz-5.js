@@ -17,8 +17,15 @@ function angkaTerbesar(sentence) {
 	//code here
 	if (sentence.length === 0) {
 		return -1;
+	} else if (sentence.length === 1) {
+		return sentence[0];
 	} else {
-		return sentence.sort((a, b) => a - b)[sentence.sort((a, b) => a - b).length - 1];
+		let besar = angkaTerbesar(sentence.slice(1));
+		if (sentence[0] > besar) {
+			return sentence[0];
+		} else {
+			return besar;
+		}
 	}
 }
 
@@ -52,27 +59,15 @@ console.log("");
 
 function changeXRecursive(data, jenis) {
 	//code here
-	let change = "";
-
-	// if (jenis === "ganjil") {
-	// 	for (let i = 0; i < data.length; i++) {
-	// 		if (data[i] % 2 === 0) {
-	// 			change += "x";
-	// 		} else {
-	// 			change += data[i];
-	// 		}
-	// 	}
-	// 	return change;
-	// } else if (jenis === "genap") {
-	// 	for (let i = 0; i < data.length; i++) {
-	// 		if (data[i] % 2 !== 0) {
-	// 			change += "x";
-	// 		} else {
-	// 			change += data[i];
-	// 		}
-	// 	}
-	// 	return change;
-	// }
+	if (data === "") {
+		return "";
+	} else {
+		if ((jenis === "ganjil" && data[0] % 2 === 0) || (jenis === "genap" && data[0] % 2 !== 0)) {
+			return "x" + changeXRecursive(data.slice(1), jenis);
+		} else {
+			return data[0] + changeXRecursive(data.slice(1), jenis);
+		}
+	}
 }
 
 console.log(changeXRecursive("012345678922468", "ganjil")); //x1x3x5x7x9xxxxx
@@ -99,7 +94,42 @@ console.log("");
 
 function consonantCounterRecursive(sentences) {
 	//code here
-	let vowels = ["a", "e", "i", "o", "u"];
+	let vowels = ["a", "A", "e", "E", "i", "I", "o", "O", "u", "U"];
+
+	if (sentences.length === 0) {
+		return 0;
+	} else {
+		if (
+			sentences[0] === "a" ||
+			sentences[0] === "A" ||
+			sentences[0] === "e" ||
+			sentences[0] === "E" ||
+			sentences[0] === "i" ||
+			sentences[0] === "I" ||
+			sentences[0] === "o" ||
+			sentences[0] === "O" ||
+			sentences[0] === "u" ||
+			sentences[0] === "U" ||
+			sentences[0] === "0" ||
+			sentences[0] === "1" ||
+			sentences[0] === "2" ||
+			sentences[0] === "3" ||
+			sentences[0] === "4" ||
+			sentences[0] === "5" ||
+			sentences[0] === "6" ||
+			sentences[0] === "7" ||
+			sentences[0] === "8" ||
+			sentences[0] === "9"
+		) {
+			return consonantCounterRecursive(sentences.slice(1));
+		} else {
+			if (sentences[0] === " ") {
+				return 0 + consonantCounterRecursive(sentences.slice(1));
+			} else {
+				return 1 + consonantCounterRecursive(sentences.slice(1));
+			}
+		}
+	}
 }
 
 console.log(consonantCounterRecursive("alDi Suka MakAn baksO")); //10
@@ -114,7 +144,7 @@ Recursive - Hanya Bilangan Terbagi Nol
 ================
 
 dividableRecursive adalah sebuah function yang
- menerima dua parameter berupa array dan num.
+menerima dua parameter berupa array dan num.
 function akan mereturn sebuah sebuah number yang 
 hanya sisa baginya nol dari bilangan num
 
@@ -128,13 +158,18 @@ hanya sisa baginya nol dari bilangan num
 
 function dividableRecursive(array, num) {
 	//code here
-	// let i = -1;
-	// if (array?.length === 0) {
-	// 	return 1;
-	// } else {
-	// 	array[array.length - 1] % num === 0;
-	// 	return dividableRecursive(array[array?.length - 1], num);
-	// }
+
+	if (array.length === 1 && array[0] % num === 0) {
+		return array[0];
+	} else if (array.length === 1 && array[0] % num !== 0) {
+		return "";
+	} else {
+		if (array[0] % num === 0) {
+			return array[0].toString() + " " + dividableRecursive(array.slice(1), num);
+		} else {
+			return dividableRecursive(array.slice(1), num);
+		}
+	}
 }
 
 // DRIVER CODE
@@ -163,12 +198,54 @@ console.log("");
 
 function hapusSimbolRec(str) {
 	//code here
-	let word = "";
-	for (let i = 0; i < str.length; i++) {
-		word += str[i];
-	}
+	let alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-	return word;
+	if (str === "") {
+		return "";
+	} else {
+		if (
+			str[0] === "a" ||
+			str[0] === "b" ||
+			str[0] === "c" ||
+			str[0] === "d" ||
+			str[0] === "e" ||
+			str[0] === "f" ||
+			str[0] === "g" ||
+			str[0] === "h" ||
+			str[0] === "i" ||
+			str[0] === "j" ||
+			str[0] === "k" ||
+			str[0] === "l" ||
+			str[0] === "m" ||
+			str[0] === "n" ||
+			str[0] === "o" ||
+			str[0] === "p" ||
+			str[0] === "q" ||
+			str[0] === "r" ||
+			str[0] === "s" ||
+			str[0] === "t" ||
+			str[0] === "u" ||
+			str[0] === "v" ||
+			str[0] === "w" ||
+			str[0] === "x" ||
+			str[0] === "y" ||
+			str[0] === "z" ||
+			str[0] === "0" ||
+			str[0] === "1" ||
+			str[0] === "2" ||
+			str[0] === "3" ||
+			str[0] === "4" ||
+			str[0] === "5" ||
+			str[0] === "6" ||
+			str[0] === "7" ||
+			str[0] === "8" ||
+			str[0] === "9"
+		) {
+			return str[0] + hapusSimbolRec(str.slice(1));
+		} else {
+			return hapusSimbolRec(str.slice(1));
+		}
+	}
 }
 
 console.log(hapusSimbolRec("test4@aa")); //test4aa
@@ -198,6 +275,16 @@ RULES
 function palindromeRecursive(sentence) {
 	//code here - saran bikin fungsi rekursif didalam sini
 	//lalu bandingkan dengan sentence
+
+	if (sentence.length <= 1) {
+		return true;
+	}
+
+	if (sentence[0] !== sentence[sentence.length - 1]) {
+		return false;
+	} else {
+		return palindromeRecursive(sentence.slice(1, -1));
+	}
 }
 
 // TEST CASES
@@ -225,6 +312,19 @@ console.log("");
 
 function parseNumber(equation) {
 	//code here
+	const convertStr = equation.toString();
+
+	if (equation % 10 === 0) {
+		return convertStr;
+	} else if (convertStr.length === 1) {
+		return convertStr;
+	} else {
+		let addingZero = convertStr[0];
+		while (addingZero.length < convertStr.length) {
+			addingZero += "0";
+		}
+		return addingZero + "+" + parseNumber(convertStr.slice(1));
+	}
 }
 
 console.log(parseNumber(3333)); // 3000+300+30+3  // 3000 + 300 + 30 + 3
@@ -262,6 +362,13 @@ Buatlah function piramid (n) yang memberitahu berapa jumlah batu bata yang diper
 
 function piramid(n) {
 	//code here
+	if (n === 0) {
+		return 0;
+	} else if (n === 1) {
+		return 1;
+	} else {
+		return n + piramid(n - 1);
+	}
 }
 
 // console.log(piramid()) // 0
@@ -310,6 +417,17 @@ RULES:
 
 function virusCheckRecursive(str, viruses) {
 	//code here
+	if (!viruses) {
+		return "There is no virus";
+	} else if (str.length === 0) {
+		return 0;
+	} else {
+		if (viruses.includes(str[0].toLowerCase()) || viruses.includes(str[0].toUpperCase())) {
+			return 1 + virusCheckRecursive(str.slice(1), viruses);
+		} else {
+			return virusCheckRecursive(str.slice(1), viruses);
+		}
+	}
 }
 
 console.log(virusCheckRecursive("qlD4MZax0raQqew", "x|0|q")); // 5
